@@ -4,12 +4,11 @@ with orders as (
         id as order_id,
         user_id as customer_id,
         order_date,
-        status
+        status,
+        _etl_loaded_at
 
     from {{ source('jaffle_shop', 'orders') }}
 )
 
 select * from orders
-{% if target.name == 'default' -%}
-    where _etl_loaded_at >= dateadd('day', -3, current_timestamp)
-{% endif -%}
+{{ limit_data_dev('_etl_loaded_at', 2) }}
