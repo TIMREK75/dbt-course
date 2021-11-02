@@ -11,4 +11,4 @@ with orders as (
 )
 
 select * from orders
-{{ limit_data_dev('_etl_loaded_at', 2) }}
+{{ limit_data_dev('_etl_loaded_at', 2) }} 
